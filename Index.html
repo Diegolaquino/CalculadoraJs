@@ -58,38 +58,62 @@
             <span>teste</span>
         </div>
         <div class="teclas grid-container">
-            <div id="t">%</div>
+            <div class="porcentagem">%</div>
             <div class="btn">&radic;</div>
-            <div class="btn">x²</div>
-            <div class="btn">D</div>
-            <div class="btn">CE</div>
-            <div class="btn">c</div>
+            <div class="quadrado">x²</div>
+            <div class="diego">D</div>
+            <div class="zero">CE</div>
+            <div class="zero">c</div>
             <div class="btn">&laquo;</div>
             <div class="btn">&divide;</div>
             <div class="btn">7</div>
             <div class="btn">8</div>
             <div class="btn">9</div>
-            <div class="btn">x</div>
+            <div class="vezes">x</div>
             <div class="btn">4</div>
             <div class="btn">5</div>
             <div class="btn">6</div>
-            <div class="btn">-</div>
+            <div class="menos">-</div>
             <div class="btn">1</div>
             <div class="btn">2</div>
             <div class="btn">3</div>
-            <div class="btn">+</div>
+            <div class="mais">+</div>
             <div class="btn">&plusmn;</div>
             <div class="btn">0</div>
             <div class="btn">.</div>
-            <div class="btn">=</div>
+            <div class="igual">=</div>
         </div>
     </div>
     <script>
-        var clickBotao = document.querySelectorAll(".btn");
+        let pilhaCalculadora = [];
 
-        clickBotao.forEach(item => {
-            console.log(item.innerHTML + ' teste');
+
+
+        let selecaoDasTeclas = document.querySelectorAll(".btn");
+
+        selecaoDasTeclas.forEach(item => {
+            item.onclick = () =>
+            {
+                var visor = document.querySelector('span');
+                pilhaCalculadora.push(item.innerText);
+                atualizarVisor(pilhaCalculadora);
+
+            }
         });
+
+        function atualizarVisor(pilhaCalculo)
+        {
+            ZeraVisor();
+            pilhaCalculo.forEach(element => {
+                document.querySelector('span').innerText += element;
+            });
+            
+        }
+
+        function ZeraVisor()
+        {
+            let visorSpan = document.querySelector('span').innerText = "";
+        }
     </script>
 </body>
 </html>
