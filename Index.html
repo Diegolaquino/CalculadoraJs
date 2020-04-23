@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/reset.css">
     <title>CalculadoJs</title>
     <style>
     body{
@@ -58,147 +59,150 @@
         background-color: #abe63c;
         color: #000;
     }
+    .teclas div{
+    cursor: pointer;
+    }
  
     </style>
 </head>
 <body>
     <div class="box-calculadora">
         <div class="visor">
-            <span>teste</span>
+            <span id="visor-value">0</span>
         </div>
         <div class="teclas grid-container">
-            <div class="btn">%</div>
-            <div class="btn">&radic;</div>
-            <div class="btn">x²</div>
-            <div class="btn">D</div>
-            <div class="btn">CE</div>
-            <div class="btn">c</div>
-            <div class="btn">&laquo;</div>
-            <div class="btn">&divide;</div>
-            <div class="btn">7</div>
-            <div class="btn">8</div>
-            <div class="btn">9</div>
-            <div class="btn">x</div>
-            <div class="btn">4</div>
-            <div class="btn">5</div>
-            <div class="btn">6</div>
-            <div class="btn">-</div>
-            <div class="btn">1</div>
-            <div class="btn">2</div>
-            <div class="btn">3</div>
-            <div class="btn">+</div>
-            <div class="btn">&plusmn;</div>
-            <div class="btn">0</div>
-            <div class="btn">.</div>
-            <div class="btn">=</div>
+            <div id="porcentagem">%</div>
+            <div id="raiz">&radic;</div>
+            <div id="quadrado">x²</div>
+            <div id="d">D</div>
+            <div id="ce">CE</div>
+            <div id="c">c</div>
+            <div id="btn">&laquo;</div>
+            <div id="divisao">&divide;</div>
+            <div id="sete">7</div>
+            <div id="oito">8</div>
+            <div id="nove">9</div>
+            <div id="x">x</div>
+            <div id="quatro">4</div>
+            <div id="cinco">5</div>
+            <div id="seis">6</div>
+            <div id="menos">-</div>
+            <div id="um">1</div>
+            <div id="dois">2</div>
+            <div id="tres">3</div>
+            <div id="mais">+</div>
+            <div id="maisemenos">&plusmn;</div>
+            <div id="zero">0</div>
+            <div id="ponto">.</div>
+            <div id="igual">=</div>
         </div>
     </div>
     <script>
+
+        let tags = document.querySelectorAll('.teclas div');
+
+
+        tags.forEach( (item) => {
+            item.addEventListener("click", insereNaPilha, false)
+        } );
+
         let pilhaCalculadora = [];
 
+        const sinais = ['-', '+', '*', '/'];
 
-
-        let selecaoDasTeclas = document.querySelectorAll(".btn");
-
-        selecaoDasTeclas.forEach(item => {
-            item.onclick = () =>
-            {
-                switch(item.innerText)
-                {
-                    case '1':
-                        insereNaPilha(item);
-                        break;
-                    case '2':
-                        insereNaPilha(item);
-                        break;  
-                    case '3':
-                        insereNaPilha(item);
-                        break;
-                    case '4':
-                        insereNaPilha(item);
-                        break;
-                    case '5':
-                        insereNaPilha(item);
-                        break;  
-                    case '6':
-                        insereNaPilha(item);    
-                        break; 
-                    case '7':
-                        insereNaPilha(item);
-                        break;
-                    case '8':
-                        insereNaPilha(item);
-                        break;  
-                    case '9':
-                        insereNaPilha(item);
-                        break;
-                    case '0':
-                        insereNaPilha(item);
-                        break;
-                    case 'c':
-                        zeraVisor();
-                        break;  
-                    case 'D':
-                        zeraVisor();
-                        madeBy();
-                        break; 
-                    case 'CE':
-                        zeraVisor();
-                        break;
-                    case '.':
-                        break;
-                    case '=':
-                        calculoOperacao();
-                        break;
-                    case '+':
-                        insereNaPilha(item);
-                        break;  
-                    case '-':
-                        insereNaPilha(item);
-                        break;
-                    case 'x':
-                        insereNaPilha(item);
-                        break; 
-                    case '%':
-                        break;   
-                    default:
-                        alert('Caractere inválido no html: ' + item.innerText);
-
-                };
-                
-
-            }
-        });
-
+       
         function insereNaPilha(item)
         {
-            var visor = document.querySelector('span');
-            pilhaCalculadora.push(item.innerText);
+            switch(item.srcElement.id){
+                case "zero":
+                    pilhaCalculadora.push("0");
+                    
+                break;
+                case "um":
+                    pilhaCalculadora.push("1");
+                    
+                break;
+                case "dois":
+                    pilhaCalculadora.push("2");
+                    
+                break;
+                case "tres":
+                    pilhaCalculadora.push("3");
+                    
+                break;
+                case "quatro":
+                    pilhaCalculadora.push("4");
+                    
+                break;
+                case "cinco":
+                    pilhaCalculadora.push("5");
+                    
+                break;
+                case "seis":
+                    pilhaCalculadora.push("6");
+                    
+                break;
+                case "sete":
+                    pilhaCalculadora.push("7");
+                    
+                break;
+                case "oito":
+                    pilhaCalculadora.push("8");
+                    
+                break;
+                case "nove":
+                    pilhaCalculadora.push("9");
+                    
+                break;
+                case "igual":
+                    calculoOperacao();
+                case "ce":
+                    zeraVisor();
+                break;
+                case "d":
+                    madeBy();
+                break;
+                default:
+                break;
+            }
+
             atualizarVisor(pilhaCalculadora);
+            
         }
+
 
         function calculoOperacao()
         {
-            var visor = document.querySelector('span');
+            
+                  
+                
         }
 
-        function atualizarVisor(pilhaCalculo)
+        function atualizarVisor(pilhaCalculadora)
         {
-            zeraVisor();
-            pilhaCalculo.forEach(element => {
-                document.querySelector('span').innerText += element;
-            });
-            
+        
+           let visor = document.getElementById('visor-value');
+           let value = '';
+
+           for(let i = 0; i < pilhaCalculadora.length; i++){
+              value += pilhaCalculadora[i];
+              console.log(value);
+           }
+
+           visor.innerText =+ value;
+
+           console.log(value);
         }
 
         function zeraVisor()
         {
-            let visorSpan = document.querySelector('span').innerText = "";
+            let visor = document.getElementById('visor-value').innerText = "0";
+            pilhaCalculadora = [];
         }
 
         function madeBy()
         {
-            let visorSpan = document.querySelector('span').innerText = "Diego Aquino";
+            let visor = document.getElementById('visor-value').innerText = "Diego Aquino";
         }
 
       
